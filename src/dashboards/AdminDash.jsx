@@ -158,7 +158,7 @@ function AdminOverride({ subs, onAction }) {
 // ─── ADMIN DASHBOARD ─────────────────────────────────────────────
 export default function AdminDash({
   user, subs, regReqs, pwReqs, users,
-  onAction, onRegApprove, onRegReject, onPwApprove, onPwUpdate, onRoleChange, onLogout
+  onAction, onRegApprove, onRegReject, onPwApprove, onPwUpdate, onRoleChange, onDelete, onLogout
 }) {
   const [nav, setNav] = useState('users');
 
@@ -208,7 +208,7 @@ export default function AdminDash({
           <PwResets reqs={pwReqs} onApprove={onPwApprove} />
         )}
         {nav === 'all' && (
-          <AllSubs submissions={subs} title='All PBAS Submissions' />
+          <AllSubs submissions={subs} title='All PBAS Submissions' onDelete={onDelete} />
         )}
         {nav === 'mypw' && (
           <ChangePw user={user} onUpdate={onPwUpdate} />

@@ -3,7 +3,7 @@ import Sidebar, { PageWrap } from '../components/layout/Sidebar.jsx';
 import { ReviewPanel, AllSubs } from '../components/shared/ReviewPanel.jsx';
 import { RegRequests, PwResets, ChangePw } from '../screens/ManagementScreens.jsx';
 
-export default function HODDash({ user, subs, regReqs, pwReqs, onAction, onRegApprove, onRegReject, onPwApprove, onPwUpdate, onLogout }) {
+export default function HODDash({ user, subs, regReqs, pwReqs, onAction, onRegApprove, onRegReject, onPwApprove, onPwUpdate, onDelete, onLogout }) {
   const [nav, setNav] = useState('review');
 
   const pending = subs.filter(s => ['pending_hod', 'returned_to_hod'].includes(s.status));
@@ -41,7 +41,7 @@ export default function HODDash({ user, subs, regReqs, pwReqs, onAction, onRegAp
           <PwResets reqs={pwReqs} onApprove={onPwApprove} />
         )}
         {nav === 'all' && (
-          <AllSubs submissions={subs} />
+          <AllSubs submissions={subs} onDelete={onDelete} />
         )}
         {nav === 'mypw' && (
           <ChangePw user={user} onUpdate={onPwUpdate} />

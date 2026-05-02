@@ -81,3 +81,10 @@ async def submission_action(sub_id: str, req: ActionRequest):
         
     await database["submissions"].update_one({"id": sub_id}, {"$set": updates})
     return {"status": "success"}
+
+@router.delete("/{sub_id}")
+async def delete_submission(sub_id: str):
+    res = await database["submissions"].delete_one({"id": sub_id})
+    if res.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Submission not found")
+    return {"status": "success"}

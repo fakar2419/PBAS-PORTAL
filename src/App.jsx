@@ -65,7 +65,7 @@ export default function App() {
     try {
       await api.approveReg(id);
       await fetchGlobalData();
-      alert(`✅ Account created. Temporary password: change@123\nPlease ask them to change their password on first login.`);
+      alert(`✅ Account created successfully.`);
     } catch (e) {
       alert("Failed to approve registration.");
     }
@@ -110,6 +110,17 @@ export default function App() {
     }
   };
 
+  const onDelete = async (subId) => {
+    if (!window.confirm('Are you sure you want to delete this submission? This action cannot be undone.')) return;
+    try {
+      await api.deleteSubmission(subId);
+      await fetchGlobalData();
+      alert('✅ Submission deleted successfully.');
+    } catch (e) {
+      alert('Failed to delete submission.');
+    }
+  };
+
   const onLogout = () => {
     api.logout();
     setMe(null);
@@ -133,6 +144,7 @@ export default function App() {
         onPwApprove={onPwApprove}
         onPwUpdate={onPwUpdate}
         onRoleChange={onRoleChange}
+        onDelete={onDelete}
         onLogout={onLogout}
       />
     );
@@ -150,6 +162,7 @@ export default function App() {
         onRegApprove={onRegApprove} onRegReject={onRegReject}
         onPwApprove={onPwApprove}
         onPwUpdate={onPwUpdate}
+        onDelete={onDelete}
         onLogout={onLogout}
       />
     );

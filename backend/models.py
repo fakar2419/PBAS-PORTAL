@@ -25,8 +25,12 @@ class RegRequestCreate(BaseModel):
     name: str
     email: str
     dept: str
+    pw: str
 
-class RegRequest(RegRequestCreate):
+class RegRequest(BaseModel):
+    name: str
+    email: str
+    dept: str
     id: str
     requestedAt: str
 

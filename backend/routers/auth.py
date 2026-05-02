@@ -33,6 +33,7 @@ async def request_registration(req: RegRequestCreate):
     new_req["id"] = "reg_" + str(int(time.time() * 1000))
     from datetime import datetime
     new_req["requestedAt"] = datetime.now().strftime("%d/%m/%Y")
+    new_req["pw"] = hash_password(new_req["pw"])
     await database["reg_reqs"].insert_one(new_req)
     return {"status": "success", "id": new_req["id"]}
 

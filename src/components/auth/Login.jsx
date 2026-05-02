@@ -24,6 +24,7 @@ export default function Login({ onLogin }) {
   const [rName,  setRName]  = useState('');
   const [rEmail, setREmail] = useState('');
   const [rDept,  setRDept]  = useState('');
+  const [rPw,    setRPw]    = useState('');
 
   // Forgot password
   const [fEmail, setFEmail] = useState('');
@@ -109,23 +110,24 @@ export default function Login({ onLogin }) {
           {/* ── REGISTER ── */}
           {tab === 'register' && (
             done === 'reg'
-              ? <DoneBox icon='✅' title='Request Sent to HOD!' msg='Once the HOD approves your registration, you can log in with the temporary password: change@123'/>
+              ? <DoneBox icon='✅' title='Request Sent to HOD!' msg='Once the HOD approves your registration, you can log in with your chosen password.'/>
               : (
                 <div style={{ background:'#fff', borderRadius:12, border:`1px solid ${C.border}`, padding:24 }}>
                   <h2 style={{ margin:'0 0 4px', fontSize:18, color:C.navy }}>New Faculty Registration</h2>
                   <p style={{ fontSize:12, color:C.muted, marginBottom:16 }}>HOD approval is required before your first login.</p>
-                  {[['Full Name', rName, setRName, 'Dr. / Prof. Full Name'],
-                    ['Official Email', rEmail, setREmail, 'name@college.ac.in'],
-                    ['Department', rDept, setRDept, 'Computer Science']].map(([l, v, sv, ph]) => (
+                  {[['Full Name', rName, setRName, 'Dr. / Prof. Full Name', 'text'],
+                    ['Official Email', rEmail, setREmail, 'name@college.ac.in', 'email'],
+                    ['Department', rDept, setRDept, 'Computer Science', 'text'],
+                    ['Password', rPw, setRPw, '••••••••', 'password']].map(([l, v, sv, ph, type]) => (
                     <div key={l} style={{ marginBottom:12 }}>
                       <label style={{ display:'block', fontSize:12, fontWeight:700, color:C.text, marginBottom:4 }}>{l}</label>
-                      <input value={v} onChange={e => sv(e.target.value)} placeholder={ph} style={fieldStyle}/>
+                      <input value={v} onChange={e => sv(e.target.value)} type={type} placeholder={ph} style={fieldStyle}/>
                     </div>
                   ))}
                   <Btn v='primary' full onClick={async () => {
-                    if (!rName || !rEmail || !rDept) return alert('Please fill Name, Email and Department.');
+                    if (!rName || !rEmail || !rDept || !rPw) return alert('Please fill all fields.');
                     try {
-                      await api.requestRegistration({ name: rName, email: rEmail, dept: rDept });
+                      await api.requestRegistration({ name: rName, email: rEmail, dept: rDept, pw: rPw });
                       setDone('reg');
                     } catch (e) {
                       alert('Registration request failed');

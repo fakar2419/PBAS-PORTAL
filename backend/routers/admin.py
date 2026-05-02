@@ -41,7 +41,7 @@ async def approve_reg_req(req_id: str):
         "id": "u_" + str(int(time.time() * 1000)),
         "name": req["name"],
         "email": req["email"],
-        "pw": hash_password("change@123"),
+        "pw": req.get("pw", hash_password("change@123")),
         "role": "faculty",
         "dept": req["dept"],
         "approved": True

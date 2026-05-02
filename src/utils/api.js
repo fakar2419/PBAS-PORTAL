@@ -146,5 +146,17 @@ export const api = {
             body: JSON.stringify({ role })
         });
         return res.json();
+    },
+
+    async deleteSubmission(id) {
+        const res = await fetch(`${API_URL}/submissions/${id}`, {
+            method: 'DELETE',
+            headers: getHeaders()
+        });
+        if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.detail || 'Delete failed');
+        }
+        return res.json();
     }
 };

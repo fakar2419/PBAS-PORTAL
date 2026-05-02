@@ -121,8 +121,9 @@ export function ReviewPanel({ submissions, filterFn, emptyMsg, onAction, actions
 }
 
 // ─── ALL SUBMISSIONS TABLE ─────────────────────────────────────────
-export function AllSubs({ submissions, title = 'All Submissions' }) {
+export function AllSubs({ submissions, title = 'All Submissions', onDelete }) {
   const [viewSub, setViewSub] = useState(null);
+  const canDelete = typeof onDelete === 'function';
 
   return (
     <div style={{ maxWidth:1000 }}>
@@ -142,6 +143,9 @@ export function AllSubs({ submissions, title = 'All Submissions' }) {
                     {['Faculty Name','Department','Designation','AY','Cat-I','Cat-II','Cat-III','Total','Files','Status',''].map(h => (
                       <th key={h} style={{ padding:'9px 12px', background:C.navy, color:'#fff', fontSize:11, fontWeight:700, textAlign:'left', whiteSpace:'nowrap', borderRight:'1px solid rgba(255,255,255,.1)' }}>{h}</th>
                     ))}
+                    {canDelete && (
+                      <th style={{ padding:'9px 12px', background:C.navy, color:'#fff', fontSize:11, fontWeight:700, textAlign:'left', whiteSpace:'nowrap' }}></th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -169,6 +173,15 @@ export function AllSubs({ submissions, title = 'All Submissions' }) {
                             View
                           </button>
                         </td>
+                        {canDelete && (
+                          <td style={{ padding:'9px 12px' }}>
+                            <button onClick={() => onDelete(sub.id)}
+                              style={{ background:'#fee2e2', border:'1px solid #fca5a5', borderRadius:6,
+                                padding:'3px 10px', cursor:'pointer', fontSize:11, color:'#dc2626', fontWeight:700 }}>
+                              🗑 Delete
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     );
                   })}
