@@ -7,3 +7,4 @@ cors
 bcrypt
 pyjwt
 email-validator
+certifi
