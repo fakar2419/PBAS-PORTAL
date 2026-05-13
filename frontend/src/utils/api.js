@@ -15,16 +15,21 @@ export const api = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, pw })
         });
-        if (!res.ok) {
+        
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
             const data = await res.json();
-            throw new Error(data.detail || 'Login failed');
+            if (!res.ok) throw new Error(data.detail || 'Login failed');
+            
+            if (data.token) {
+                localStorage.setItem('pbas_token', data.token);
+                localStorage.setItem('pbas_user', JSON.stringify(data));
+            }
+            return data;
+        } else {
+            // The server returned HTML instead of JSON. This usually means the API URL is wrong.
+            throw new Error('Server configuration error: The API URL is pointing to a frontend/HTML page instead of the backend.');
         }
-        const data = await res.json();
-        if (data.token) {
-            localStorage.setItem('pbas_token', data.token);
-            localStorage.setItem('pbas_user', JSON.stringify(data));
-        }
-        return data;
     },
 
     logout() {
