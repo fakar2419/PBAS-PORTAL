@@ -71,6 +71,9 @@ async def submission_action(sub_id: str, req: ActionRequest):
     elif req.action == 'expert_review':
         updates["status"] = 'expert_reviewed'
         updates["expertComment"] = req.remark
+    elif req.action == 'return_principal':
+        updates["status"] = 'returned_to_principal'
+        updates["expertComment"] = req.remark
         
     if req.sectionRemarks:
         current_remarks = sub.get("sectionRemarks", {})

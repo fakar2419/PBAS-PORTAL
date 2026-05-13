@@ -50,6 +50,11 @@ export function ReviewPanel({ submissions, filterFn, emptyMsg, onAction, actions
                     Principal Remark: {sub.principalRemark}
                   </div>
                 )}
+                {sub.expertComment && (
+                  <div style={{ marginTop:6, background:'#f3e8ff', border:'1px solid #d8b4fe', borderRadius:7, padding:'6px 10px', fontSize:12, color:'#581c87' }}>
+                    Expert Remark: {sub.expertComment}
+                  </div>
+                )}
               </div>
               <div style={{ textAlign:'right' }}>
                 <div style={{ fontSize:44, fontWeight:900, color:C.blue, lineHeight:1 }}>{sc.total}</div>

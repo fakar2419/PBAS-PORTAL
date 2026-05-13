@@ -41,6 +41,7 @@ export const SM = {
   returned_to_hod:      { label: 'Returned to HOD',            dot: '#f97316', bg: '#ffedd5', fg: '#9a3412' },
   hod_remarked:         { label: 'HOD Remarked → Principal',   dot: '#8b5cf6', bg: '#ede9fe', fg: '#5b21b6' },
   sent_to_expert:       { label: 'Sent to Expert',             dot: '#0891b2', bg: '#cffafe', fg: '#164e63' },
+  returned_to_principal:{ label: 'Returned to Principal',      dot: '#eab308', bg: '#fef08a', fg: '#854d0e' },
   expert_reviewed:      { label: 'Expert Reviewed ✓',          dot: '#059669', bg: '#d1fae5', fg: '#064e3b' },
 };
 

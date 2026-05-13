@@ -27,6 +27,7 @@ export default function ExpertDash({ user, subs, onAction, onPwUpdate, onLogout 
             title='Expert Review Panel'
             subtitle='PBAS submissions forwarded by Principal for expert evaluation'
             actions={[
+              { label: '↩ Return to Principal', v: 'warning', action: 'return_principal', needRemark: true },
               { label: '📝 Submit Expert Review & Close', v: 'purple', action: 'expert_review', needRemark: true },
             ]}
             onAction={onAction}

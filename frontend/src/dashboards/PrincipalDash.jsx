@@ -6,7 +6,7 @@ import { ChangePw } from '../screens/ManagementScreens.jsx';
 export default function PrincipalDash({ user, subs, onAction, onPwUpdate, onLogout }) {
   const [nav, setNav] = useState('review');
 
-  const pending = subs.filter(s => ['sent_to_principal', 'hod_remarked'].includes(s.status));
+  const pending = subs.filter(s => ['sent_to_principal', 'hod_remarked', 'returned_to_principal'].includes(s.status));
 
   const navItems = [
     { id: 'review',   icon: '📊', label: 'Review Submissions', badge: pending.length },
@@ -22,7 +22,7 @@ export default function PrincipalDash({ user, subs, onAction, onPwUpdate, onLogo
         {nav === 'review' && (
           <ReviewPanel
             submissions={subs}
-            filterFn={s => ['sent_to_principal', 'hod_remarked'].includes(s.status)}
+            filterFn={s => ['sent_to_principal', 'hod_remarked', 'returned_to_principal'].includes(s.status)}
             emptyMsg='No submissions pending principal review.'
             title='Final PBAS Review — Principal'
             subtitle='Submissions approved by HOD, awaiting principal review'

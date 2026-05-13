@@ -148,6 +148,7 @@ function AdminOverride({ subs, onAction }) {
         { label: '✓ Approve as HOD →',        v: 'success',  action: 'approve_hod',     needRemark: false },
         { label: '↩ Return to HOD',           v: 'warning',  action: 'return_hod',      needRemark: true  },
         { label: '✅ Send to Expert →',        v: 'purple',   action: 'send_expert',     needRemark: false },
+        { label: '↩ Return to Principal',     v: 'warning',  action: 'return_principal',needRemark: true  },
         { label: '⭐ Mark Expert Reviewed',    v: 'outline',  action: 'expert_reviewed', needRemark: false },
       ]}
       onAction={onAction}
