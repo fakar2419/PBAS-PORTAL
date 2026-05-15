@@ -5,9 +5,25 @@ from routers import auth, submissions, admin
 app = FastAPI(title="PBAS Portal API")
 
 # Configure CORS for React frontend
+import os
+frontend_url = os.getenv("FRONTEND_URL", "")
+
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://pbas-frontend.onrender.com", # Update this with your actual frontend URL if different
+]
+
+if frontend_url:
+    origins.append(frontend_url)
+
+# In production, you might want to specify the exact domain
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.onrender\.com", # Automatically allows any Render app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
